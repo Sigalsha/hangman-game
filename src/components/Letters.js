@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import Letter from './Letter.js';
 
-
-
 class Letters extends Component {
 
     generateLetterTags(letterStatus) {
         return Object.keys(letterStatus).map(letter => {
-            return (<Letter letter={letter} key={letter} />)
+            return (<Letter letter={letter} key={letter} deleteLetter={this.props.deleteLetter} />)
         })
     }
 
     render() {
         return (
             <div>
-                <div>Letters will be here: </div>
+                <div>Available Letters: </div>
                 {this.generateLetterTags(this.props.letterStatus)}
             </div>
         );

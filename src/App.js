@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Score from './components/Score.js';
 import Letters from './components/Letters.js';
 import Solution from './components/Solution.js';
+import Letter from './components/Letter.js';
 
 class App extends Component {
   constructor() {
@@ -33,13 +33,19 @@ class App extends Component {
     this.setState({ letterStatus: letterStatus })
   }
 
+  reduceScore = () => {
+    this.setState({ score: this.state.score - 10 })
+  }
+
   render() {
     return (
       <div>
         <Score score={this.state.score} />
-        <Letters letterStatus={this.state.letterStatus} />
-        <button onClick={this.deleteLetter}>Remove First</button>
-        <Solution solution={this.state.letterStatus} />
+        <Solution letterStatus={this.state.letterStatus} />
+        <Letters letterStatus={this.state.letterStatus} deleteLetter={this.deleteLetter} />
+        {/* <Letter onClick={this.deleteLetter} /> */}
+        {/* <button onClick={this.deleteLetter}>Remove First</button> */}
+        {/* <button onClick={this.reduceScore}>reduce score</button> */}
       </div>  
     )
   }

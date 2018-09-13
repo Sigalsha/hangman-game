@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Letter extends Component {
     render() {
-        return (<span>{this.props.letter}</span>);
+        return ( <span onClick={this.props.deleteLetter}>{this.props.letter}</span> );
     }
 }
 
