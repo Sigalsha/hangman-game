@@ -3,9 +3,14 @@ import Letter from './Letter.js';
 
 class Letters extends Component {
 
-    generateLetterTags(letterStatus) {
+    generateLetterTags() {
+        const letterStatus = this.props.letterStatus
         return Object.keys(letterStatus).map(letter => {
-            return (<Letter letter={letter} key={letter} deleteLetter={this.props.deleteLetter} />)
+            return (<Letter
+                key={letter}
+                class={letterStatus[letter] ? "selected" : null} 
+                letter={letter} 
+                selectLetter={this.props.selectLetter} />)
         })
     }
 
