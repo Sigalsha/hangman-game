@@ -9,7 +9,7 @@ class Solution extends Component {
             return (<Letter
                 key={letter}
                 class="solutionLetter"
-                letter={this.props.letterStatus[letter] ? letter: "_ " }  />)
+                letter={this.props.letterStatus[letter] ? letter: " _ " } />)
         })
     }
 

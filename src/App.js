@@ -11,7 +11,8 @@ class App extends Component {
       letterStatus: this.generateLetterStatuses(),
       score: 100,
       word: "CALM",
-      hint: "Your prefered mood right now"
+      hint: "Your prefered mood right now",
+      guessWord: ""
     }
   }
 
@@ -26,21 +27,11 @@ class App extends Component {
 
   selectLetter = (letter) => {
     let letterStatus = {...this.state.letterStatus}
-    letterStatus[letter] = true 
-    
-    this.setState({ letterStatus: letterStatus })
-  }
+    letterStatus[letter] = true
 
-  checkSelectedLetter = () => {
-    let word = {...this.state.word}
-    word.split("").forEach(letter => {
-      if letter === letterStatus[letter]
-      letter={letterStatus[letter] ? true: false}
-    });(letter => {
-      return (<Letter
-          key={letter}
-          letter={this.props.letterStatus[letter] ? letter: "_ " }  />)
-  })
+    this.checkIfWordIncludesLetter(letter)
+
+    this.setState({ letterStatus: letterStatus })
   }
 
   reduceScore = () => {
@@ -51,14 +42,57 @@ class App extends Component {
     this.setState({ score: this.state.score + 5 })
   }
 
+  checkIfWordIncludesLetter = (letter) => {
+    let word = this.state.word
+    // this.checkGuessStatus()
+    if (word.includes(letter)) {
+      this.addScore()
+      this.addToGuessWord(letter)
+      
+    } else {
+      this.reduceScore()
+    }
+
+  }
+
+  addToGuessWord = (letter) => {
+    let guessWord = this.state.guessWord + letter
+    console.log(guessWord + " , " + this.state.word)
+    this.setState({guessWord: guessWord})
+  }
+
+   // checkGuessStatus = () => {
+  //   let word = this.state.word
+  //   let guessWord = this.state.guessWord
+  //   if (word === guessWord) {
+  //     return;
+  //   }
+  // } 
+  
   render() {
-    return (
-      <div>
-        <Score word={this.state.word} letterStatus={this.state.letterStatus} reduceScore={this.reduceScore} addScore={this.addScore} />
-        <Solution letterStatus={this.state.letterStatus} word={this.state.word} hint={this.state.hint} />
-        <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
-      </div>  
-    )
+    if (this.state.guessWord === this.state.word){
+      return (
+        <div className="success-message">
+          <h1>You guessed the word! <br></br>
+            Good Job!!!</h1>
+        </div>
+      )
+    } else if (this.state.score === 0) {
+      return (
+        <div className="game-over">
+          <h1>Too bad, game over...<br></br> 
+              The hidden word was: {this.state.word}</h1>
+        </div>
+      )
+    } else { 
+        return (
+          <div>
+            <Score score={this.state.score} />
+            <Solution letterStatus={this.state.letterStatus} word={this.state.word} hint={this.state.hint} />
+            <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
+          </div>  
+        )
+      }  
   }
 }
 

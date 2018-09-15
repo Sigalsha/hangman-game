@@ -11,3 +11,33 @@ body {
 .solutionLetter {
   color: black;
 }
+
+.high-score {
+  color: #66bb6a;
+}
+
+.medium-score {
+  color: #ffca28;
+}
+
+.low-score {
+  color: #e53935;
+}
+
+.success-message {
+  height: 30%;
+  width: 80%;
+  background-color: #66bb6a;
+  color: black;
+  font-weight: bolder;
+  font-size: 1em;
+}
+
+.game-over {
+  height: 30%;
+  width: 80%;
+  background-color: #e53935;
+  color: black;
+  font-weight: bolder;
+  font-size: 1em;
+}
