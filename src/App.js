@@ -12,7 +12,9 @@ class App extends Component {
       score: 100,
       word: "CALM",
       hint: "Your prefered mood right now",
-      guessWord: ""
+      guessWord: "",
+      wordList: ["CALM", "BLUES", "MILK", "TANGO"] ,
+      hintList: ["Your prefered mood right now", "American music genre", "Drink it", "Elegant dance"]
     }
   }
 
@@ -44,7 +46,6 @@ class App extends Component {
 
   checkIfWordIncludesLetter = (letter) => {
     let word = this.state.word
-    // this.checkGuessStatus()
     if (word.includes(letter)) {
       this.addScore()
       this.addToGuessWord(letter)
@@ -57,31 +58,82 @@ class App extends Component {
 
   addToGuessWord = (letter) => {
     let guessWord = this.state.guessWord + letter
-    console.log(guessWord + " , " + this.state.word)
     this.setState({guessWord: guessWord})
   }
 
-   // checkGuessStatus = () => {
-  //   let word = this.state.word
-  //   let guessWord = this.state.guessWord
-  //   if (word === guessWord) {
-  //     return;
-  //   }
-  // } 
+  checkGuessStatus = () => {
+    let word = this.state.word.split("").sort()
+    let guessWord = this.state.guessWord.split("").sort()
+    let count = 0
+    for (let i=0; i < guessWord.length; i++) {
+      if (guessWord[i] === word[i]) {
+        count++
+      }
+    }
+    if (count === word.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }    
+
+  generateWord = () => {
+    let word = this.state.word
+    let wordList = [...this.state.wordList]
+    for (let i = 0; i < wordList.length; i++) {
+      if (word === wordList[i]) {
+        word = wordList[i + 1];
+      }
+    }
+    this.setState({wordList: wordList})
+    this.setState({ word: word})
+  }
+
+  generateHint = () => {
+    let hint = this.state.hint
+    let hintList = [...this.state.hintList]
+    for (let i = 0; i < hintList.length; i++) {
+      if (hint === hintList[i]) {
+        hint = hintList[i + 1];
+      }
+    }
+    this.setState({hintList: hintList})
+    this.setState({ hint: hint})
+  }
+
+  startOver = () => {
+    this.generateWord()
+    this.generateHint()
+    let letterStatus = {...this.state.letterStatus}
+    letterStatus = this.generateLetterStatuses()
+    this.setState({letterStatus: letterStatus})
+    let guessWord = this.state.guessWord
+    guessWord = ""
+    this.setState({guessWord: guessWord})
+  }
   
   render() {
-    if (this.state.guessWord === this.state.word){
+    if (this.checkGuessStatus() === true){
       return (
-        <div className="success-message">
-          <h1>You guessed the word! <br></br>
-            Good Job!!!</h1>
+        <div>
+          <div className="success-message">
+            <h1>You guessed the word! <br></br>
+              Good Job!!!</h1>
+          </div>
+          <br></br>
+          <div className="restart" onClick={this.startOver}>start-over</div>
         </div>
+         
       )
-    } else if (this.state.score === 0) {
+    } else if (this.state.score <= 0) {
       return (
-        <div className="game-over">
-          <h1>Too bad, game over...<br></br> 
-              The hidden word was: {this.state.word}</h1>
+        <div>
+          <div className="game-over">
+            <h1>Too bad, game over...<br></br> 
+                The hidden word was: {this.state.word}</h1>
+          </div>
+          <br></br>
+          <div className="restart" onClick={this.startOver}>start-over</div>
         </div>
       )
     } else { 
