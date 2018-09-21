@@ -5,7 +5,7 @@ import Letter from './Letter.js';
 class Solution extends Component {
 
     generateLetterTags() {
-        return this.props.word.split("").map(letter => {
+        return Object.keys(this.props.word).map(letter => {
             return (<Letter
                 key={letter}
                 class="solutionLetter"
