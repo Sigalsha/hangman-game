@@ -52,10 +52,10 @@ class App extends Component {
     return hintList[0];
   } 
 
-  spliceList = (item, list) => {
-    for (let item in list) {
-      list.splice(item, 1)
-    }
+  spliceList = (list) => {
+    if (list.length > 1) {
+      list.shift()
+    } 
     return list;
   }
 
@@ -63,6 +63,9 @@ class App extends Component {
     let letterStatus = {...this.state.letterStatus};
     let score = this.state.score;
     let word = {...this.state.word};
+    if (letterStatus[letter] === true) {
+      return;
+    }
     letterStatus[letter] = true
     if (word.hasOwnProperty(letter) === true) {
       word[letter] = true
@@ -96,16 +99,61 @@ class App extends Component {
     return hiddenWord
   }
 
+  checkScoreOnGameOver = () => {
+    let score = this.state.score
+    if (score <= 0) {
+      score = 100;
+    } 
+    return score;
+  }
+
+  MsgGameEnded = () => {
+    if (this.state.score > 0) {
+      alert("Congratulations!  You saved the hangman!!!")
+    } else {
+      alert("Sorry, you had your chances... You failed to save hangman")
+    }
+  }
+
+  startGamesAgain = () => {
+    let letterStatus = {...this.state.letterStatus}
+    letterStatus = this.generateLetterStatuses()
+    let score = this.state.score
+    score = 100
+    let word = {...this.state.word}
+    word = {"C": false, "A": false, "L": false, "M": false}
+    let hint = this.state.hint
+    hint = "Your prefered mood right now"
+    let wordList = [...this.state.wordList]
+    wordList = ["CALM", "BLUES", "MILK", "TANGO"]
+    let hintList = [...this.state.hintList]
+    hintList = ["Your prefered mood right now", "American music genre", "Drink it", "Elegant dance"]
+    this.setState({
+      letterStatus: letterStatus,
+      score: score,
+      word: word,
+      hint: hint,
+      wordList: wordList,
+      hintList: hintList
+    }) 
+  }
+
   startOver = () => {
+    if (this.state.wordList.length <= 1){
+      this.MsgGameEnded()
+      this.startGamesAgain()
+      return;
+    }
     let letterStatus = {...this.state.letterStatus}
     letterStatus = this.generateLetterStatuses()
     let hint = this.generateHint()
     let word = this.generateWord()
-    let wordList = this.spliceList(this.revealHiddenWord(), [...this.state.wordList])
-    let hintList = this.spliceList(this.state.hint, [...this.state.hintList]) 
-
+    let wordList = this.spliceList([...this.state.wordList])
+    let hintList = this.spliceList([...this.state.hintList]) 
+    let score = this.checkScoreOnGameOver()
     this.setState({
       letterStatus: letterStatus,
+      score: score,
       word: word,
       hint: hint,
       wordList: wordList,
@@ -140,9 +188,10 @@ class App extends Component {
     } else { 
         return (
           <div>
-            <Score score={this.state.score} />
             <Solution letterStatus={this.state.letterStatus} word={this.state.word} hint={this.state.hint} />
             <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
+            <Score score={this.state.score} />
+
           </div>
         )
     }  

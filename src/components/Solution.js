@@ -17,8 +17,8 @@ class Solution extends Component {
         // console.log(this.props.letterStatus)
         return (
             <div>
-                <span>{this.generateLetterTags()}</span>
                 <div>{this.props.hint}</div>
+                <span>{this.generateLetterTags()}</span>
             </div>
         )
     }
