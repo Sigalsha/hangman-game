@@ -4,6 +4,7 @@ import Score from './components/Score.js';
 import Letters from './components/Letters.js';
 import Solution from './components/Solution.js';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -165,33 +166,33 @@ class App extends Component {
     let hiddenWord =  this.revealHiddenWord()
     if (this.checkGuessWordStatus() === true){
       return (
-        <div>
+        <div className="container-div">
           <div className="success-message">
             <h1>You guessed the word! <br></br>
               Good Job!!!</h1>
           </div>
           <br></br>
-          <div className="restart" onClick={this.startOver}>start-over</div>
+          <div className="start-over" onClick={this.startOver}>start-over</div>
         </div>
       )
     } else if (this.state.score <= 0) {
       return (
-        <div>
+        <div className="container-div">
+          <div className="img"></div>
           <div className="game-over">
             <h1>Too bad, game over...<br></br> 
-                The hidden word was: {hiddenWord}</h1>
+                The hidden word was: <span class="hiddenWord">{hiddenWord}</span></h1>
           </div>
           <br></br>
-          <div className="restart" onClick={this.startOver}>start-over</div>
+          <div className="start-over" onClick={this.startOver}>start-over</div>
         </div>
       )
     } else { 
         return (
-          <div>
+          <div className="container-div">
             <Solution letterStatus={this.state.letterStatus} word={this.state.word} hint={this.state.hint} />
             <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
             <Score score={this.state.score} />
-
           </div>
         )
     }  

@@ -5,7 +5,7 @@ class Letter extends Component {
         this.props.selectLetter(this.props.letter)
     }
     render() {
-        return ( <span 
+        return ( <span class="letter"
             className={this.props.class} onClick={this.selectLetter}>
             {this.props.letter}
             </span> );

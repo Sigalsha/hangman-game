@@ -16,9 +16,9 @@ class Letters extends Component {
 
     render() {
         return (
-            <div>
+            <div className="letters">
                 <div>Available Letters: </div>
-                {this.generateLetterTags(this.props.letterStatus)}
+                <div className="alphabet">{this.generateLetterTags(this.props.letterStatus)}</div>
             </div>
         );
     }

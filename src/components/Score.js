@@ -13,7 +13,12 @@ class Score extends Component {
     }
 
     render() {
-        return ( <div className={this.renderScoreClass()}> score:  <strong>{this.props.score}</strong></div> );
+        return ( 
+        <div className={this.renderScoreClass()}>
+            <div className="score">
+             score:  <strong>{this.props.score}</strong>
+            </div>
+        </div> );
     }    
 }   
 

@@ -16,9 +16,9 @@ class Solution extends Component {
     render() {
         // console.log(this.props.letterStatus)
         return (
-            <div>
-                <div>{this.props.hint}</div>
-                <span>{this.generateLetterTags()}</span>
+            <div className="hintBox">
+                <div>{this.props.hint} :</div>
+                <span className="guessLines">{this.generateLetterTags()}</span>
             </div>
         )
     }
