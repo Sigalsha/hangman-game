@@ -1,0 +1,18 @@
+.score {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-top: 4%;
+}
+
+.high-score {
+    color: rgb(133, 202, 118);
+}
+  
+.medium-score {
+    color: #ffca28;
+}
+  
+.low-score {
+    color: rgb(246, 46, 43);
+}
+  

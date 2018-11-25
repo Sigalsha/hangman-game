@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../styles/Letters.css'
+
 
 class Letter extends Component {
     selectLetter = () => {

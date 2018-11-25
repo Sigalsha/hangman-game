@@ -1,0 +1,22 @@
+.letters {
+    margin-top: 2%;
+}
+
+.alphabet {
+    font-family: 'Handlee', cursive;
+    letter-spacing: 0.2em;
+    margin-top: 2%;
+    font-weight: 600;
+}
+
+.selected {
+    text-decoration: line-through; 
+}
+
+.letter {
+    font-family: 'Handlee', cursive;
+}
+  
+.letter:hover{
+    color: #ffca28;
+}

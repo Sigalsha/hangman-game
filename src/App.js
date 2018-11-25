@@ -11,9 +11,9 @@ class App extends Component {
     this.state = {
       letterStatus: this.generateLetterStatuses(),
       score: 100,
-      word: {"C": false, "A": false, "L": false, "M": false},
+      word: { "C": false, "A": false, "L": false, "M": false },
       hint: "Your prefered mood right now",
-      wordList: ["CALM", "BLUES", "MILK", "TANGO"] ,
+      wordList: ["CALM", "BLUES", "MILK", "TANGO"],
       hintList: ["Your prefered mood right now", "American music genre", "Drink it", "Elegant dance"]
     }
   }
@@ -25,19 +25,19 @@ class App extends Component {
     }
     return letterStatus
   }
-  
+
   generateWord = () => {
     let hiddenWord = this.revealHiddenWord()
-    let word = {...this.state.word}
+    let word = { ...this.state.word }
     const wordList = [...this.state.wordList]
-    for (let w=0; w < wordList.length - 1 ; w++) {
+    for (let w = 0; w < wordList.length - 1; w++) {
       if (hiddenWord === wordList[w]) {
         let nextWord = wordList[w + 1]
         word = {};
         for (let l of nextWord) {
           word[l] = false;
         }
-        return word;  
+        return word;
       }
     }
   }
@@ -45,25 +45,25 @@ class App extends Component {
   generateHint = () => {
     let hint = this.state.hint
     const hintList = [...this.state.hintList]
-    for (let h=0; h < hintList.length - 1; h++) {
+    for (let h = 0; h < hintList.length - 1; h++) {
       if (hint === hintList[h]) {
         return hintList[h + 1];
-      } 
+      }
     }
     return hintList[0];
-  } 
+  }
 
   spliceList = (list) => {
     if (list.length > 1) {
       list.shift()
-    } 
+    }
     return list;
   }
 
   selectLetter = (letter) => {
-    let letterStatus = {...this.state.letterStatus};
+    let letterStatus = { ...this.state.letterStatus };
     let score = this.state.score;
-    let word = {...this.state.word};
+    let word = { ...this.state.word };
     if (letterStatus[letter] === true) {
       return;
     }
@@ -74,7 +74,7 @@ class App extends Component {
     } else {
       score -= 20
     }
-    this.setState({ 
+    this.setState({
       letterStatus: letterStatus,
       word: word,
       score: score
@@ -82,17 +82,17 @@ class App extends Component {
   }
 
   checkGuessWordStatus = () => {
-    let word = {...this.state.word}
+    let word = { ...this.state.word }
     for (let letter in word) {
       if (word[letter] === false) {
         return false
-      } 
+      }
     }
     return true;
-  }  
+  }
 
   revealHiddenWord = () => {
-    let word = {...this.state.word}
+    let word = { ...this.state.word }
     let hiddenWord = "";
     for (let letter in word) {
       hiddenWord += letter
@@ -104,7 +104,7 @@ class App extends Component {
     let score = this.state.score
     if (score <= 0) {
       score = 100;
-    } 
+    }
     return score;
   }
 
@@ -117,13 +117,13 @@ class App extends Component {
   }
 
   startGamesAgain = () => {
-    let letterStatus = {...this.state.letterStatus}
+    let letterStatus = { ...this.state.letterStatus }
     letterStatus = this.generateLetterStatuses()
-    let score = this.state.score
+    let { score } = this.state
     score = 100
-    let word = {...this.state.word}
-    word = {"C": false, "A": false, "L": false, "M": false}
-    let hint = this.state.hint
+    let word = { ...this.state.word }
+    word = { "C": false, "A": false, "L": false, "M": false }
+    let { hint } = this.state
     hint = "Your prefered mood right now"
     let wordList = [...this.state.wordList]
     wordList = ["CALM", "BLUES", "MILK", "TANGO"]
@@ -136,21 +136,21 @@ class App extends Component {
       hint: hint,
       wordList: wordList,
       hintList: hintList
-    }) 
+    })
   }
 
   startOver = () => {
-    if (this.state.wordList.length <= 1){
+    if (this.state.wordList.length <= 1) {
       this.MsgGameEnded()
       this.startGamesAgain()
       return;
     }
-    let letterStatus = {...this.state.letterStatus}
+    let letterStatus = { ...this.state.letterStatus }
     letterStatus = this.generateLetterStatuses()
     let hint = this.generateHint()
     let word = this.generateWord()
     let wordList = this.spliceList([...this.state.wordList])
-    let hintList = this.spliceList([...this.state.hintList]) 
+    let hintList = this.spliceList([...this.state.hintList])
     let score = this.checkScoreOnGameOver()
     this.setState({
       letterStatus: letterStatus,
@@ -158,63 +158,58 @@ class App extends Component {
       word: word,
       hint: hint,
       wordList: wordList,
-      hintList: hintList 
+      hintList: hintList
     })
   }
 
   render() {
-    let hiddenWord =  this.revealHiddenWord()
-    if (this.checkGuessWordStatus() === true){
+    const { letterStatus, word, hint, score } = this.state
+    let hiddenWord = this.revealHiddenWord()
+    if (this.checkGuessWordStatus()) {
+      return (
+        <SuccessMode onClick={this.startOver} />
+      )
+    } else if (score <= 0) {
+      return (
+        <FailMode hiddenWord={hiddenWord} onClick={this.startOver} />
+      )
+    } else {
       return (
         <div className="container-div">
-          <div className="success-message">
-            <h1>You guessed the word! <br></br>
-              Good Job!!!</h1>
-          </div>
-          <br></br>
-          <div className="start-over" onClick={this.startOver}>start-over</div>
+          <Solution letterStatus={letterStatus} word={word} hint={hint} />
+          <Letters letterStatus={letterStatus} selectLetter={this.selectLetter} />
+          <Score score={score} />
         </div>
       )
-    } else if (this.state.score <= 0) {
-      return (
-        <div className="container-div">
-          <div className="img"></div>
-          <div className="game-over">
-            <h1>Too bad, game over...<br></br> 
-                The hidden word was: <span class="hiddenWord">{hiddenWord}</span></h1>
-          </div>
-          <br></br>
-          <div className="start-over" onClick={this.startOver}>start-over</div>
-        </div>
-      )
-    } else { 
-        return (
-          <div className="container-div">
-            <Solution letterStatus={this.state.letterStatus} word={this.state.word} hint={this.state.hint} />
-            <Letters letterStatus={this.state.letterStatus} selectLetter={this.selectLetter} />
-            <Score score={this.state.score} />
-          </div>
-        )
-    }  
+    }
   }
 }
 
+const SuccessMode = ({ onClick }) => {
+  return (
+    <div className="container-div">
+      <div className="success-message">
+        <h1>You guessed the word! <br></br>
+          Good Job!!!</h1>
+      </div>
+      <br></br>
+      <div className="start-over" onClick={onClick}>start-over</div>
+    </div>
+  )
+}
+
+const FailMode = ({ hiddenWord, onClick }) => {
+  return (
+    <div className="container-div">
+      <div className="img"></div>
+      <div className="game-over">
+        <h1>Too bad, game over...<br></br>
+          The hidden word was: <span class="hiddenWord">{hiddenWord}</span></h1>
+      </div>
+      <br></br>
+      <div className="start-over" onClick={onClick}>start-over</div>
+    </div>
+  )
+}
+
 export default App;
-
-
-
-
-
-// var loginButton;
-// if (loggedIn) {
-//   loginButton = <LogoutButton />;
-// } else {
-//   loginButton = <LoginButton />;
-// }
-
-// return (
-//   <nav>
-//     <Home />
-//     {loginButton}
-//   </nav>
-// );

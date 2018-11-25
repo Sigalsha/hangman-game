@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Letter from './Letter.js';
+import '../styles/Solution.css'
 
 
 class Solution extends Component {
@@ -14,7 +15,6 @@ class Solution extends Component {
     }
 
     render() {
-        // console.log(this.props.letterStatus)
         return (
             <div className="hintBox">
                 <div>{this.props.hint} :</div>

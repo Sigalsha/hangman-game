@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Letter from './Letter.js';
+import '../styles/Letters.css'
 
 class Letters extends Component {
 
     generateLetterTags() {
-        const letterStatus = this.props.letterStatus
+        const { letterStatus } = this.props
         return Object.keys(letterStatus).map(letter => {
             return (<Letter
                 key={letter}
@@ -26,9 +27,3 @@ class Letters extends Component {
 
 export default Letters;
 
-//   My function - to check if the same: 
-// generateLetterTags(letterStatus) {
-//     const letters = Object.keys(letterStatus);
-//     const letterTags = letters.map(letter => <Letter letter={letter}/>);
-//     return letterTags;
-// }

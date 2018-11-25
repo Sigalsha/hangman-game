@@ -22,125 +22,19 @@ body {
   color: #F5F5F5;
 }
 
-.container-div {
-  margin: auto;
-  width: 50%;
-  height: 50%;
-  padding-top: 2%;
-}
-
-.letters {
-  margin-top: 2%;
-}
-
-.hintBox {
-  margin-bottom: 5%;
-}
-
-.selected {
-  text-decoration: line-through; 
-}
-
-.solutionLetter {
-  color: #F5F5F5;
-  font-family: 'Handlee', cursive;
-  font-size: 2em;
-  font-weight: 500;
-}
-
-.guessLines {
-  letter-spacing: 0.1em;
-  margin-left: 10%;
-}
-
-.alphabet {
-  font-family: 'Handlee', cursive;
-  letter-spacing: 0.2em;
-  margin-top: 2%;
-  font-weight: 600;
-}
-
-.letter {
-  font-family: 'Handlee', cursive;
-}
-
-.letter:hover{
-  color: #ffca28;
-}
-
-.score {
-  font-weight: bold;
-  font-size: 1.4em;
-  margin-top: 4%;
-}
-
-.high-score {
-  color: rgb(133, 202, 118);
-}
-
-.medium-score {
-  color: #ffca28;
-}
-
-.low-score {
-  color: rgb(246, 46, 43);
-}
-
-.success-message {
-  box-sizing: border-box;
-  padding: 1%;
-  padding-left: 6%;
-  height: 50%;
-  width: 70%;
-  border: 10px solid rgba(102, 187, 106, 0.8);
-  color: #F5F5F5;
-  opacity: 0.9;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.3em;
-}
-
-/* .img {
-  box-sizing: border-box;
-  height: 12em;
-  width: 10em;
-  float: right;
-  border: 3px solid red;
-  background-image: url('img/hang.jpg');
-  background-repeat: no-repeat;
-  background-position: center; 
-} */
-
-.game-over {
-  box-sizing: border-box;
-  padding: 2%;
-  padding-left: 4%;
-  height: 50%;
-  width: 50%;
-  border: 10px solid rgba(246, 46, 43, 0.8);
-  /* color: rgb(246, 46, 43); */
-  font-family: 'Nunito', sans-serif;
-}
-
-.hiddenWord {
-  box-sizing: border-box;
-  border: 0.5% solid;
-  padding: 3%;
-  color: rgb(246, 46, 43);
-}
 
 
-.start-over {
-  margin-left: 20%; 
-  width: 30%;
-  border: 8px solid rgba(255, 202, 40, 0.8);
-  font-weight: bolder;
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-}
 
-.start-over:hover {
-  background-color: rgba(255, 202, 40, 0.4);
-}
+
+
+
+
+
+
+
+
+
+
 
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,600');
 @import url('https://fonts.googleapis.com/css?family=Handlee|Nunito:400,600');

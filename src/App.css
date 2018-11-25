@@ -1,28 +1,67 @@
-.App {
+.container-div {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  padding-top: 2%;
+}
+
+.success-message {
+  height: 50%;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+  padding-left: 2%;
+  border: 10px solid rgba(102, 187, 106, 0.8);
+  color: #F5F5F5;
+  opacity: 0.9;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.3em;
+}
+
+.start-over {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  margin-left: 15%;
+  border: 8px solid rgba(255, 202, 40, 0.8);
+  font-weight: bolder;
   text-align: center;
+  font-family: 'Nunito', sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.start-over:hover {
+  background-color: rgba(255, 202, 40, 0.4);
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/* .img {
+  box-sizing: border-box;
+  height: 12em;
+  width: 10em;
+  float: right;
+  border: 3px solid red;
+  background-image: url('img/hang.jpg');
+  background-repeat: no-repeat;
+  background-position: center; 
+} */
+
+.game-over {
+  height: 50%;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+  padding-left: 6%;
+  margin-left: 5%;
+  border: 10px solid rgba(246, 46, 43, 0.8);
+  font-family: 'Nunito', sans-serif;
 }
 
-.App-title {
-  font-size: 1.5em;
+.hiddenWord {
+  box-sizing: border-box;
+  border: 0.5% solid;
+  padding: 3%;
+  color: rgb(216, 32, 29);
+  font-weight: 900;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
