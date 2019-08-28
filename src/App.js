@@ -11,10 +11,10 @@ class App extends Component {
     this.state = {
       letterStatus: this.generateLetterStatuses(),
       score: 100,
-      word: { "C": false, "A": false, "L": false, "M": false },
-      hint: "Your prefered mood right now",
-      wordList: ["CALM", "BLUES", "MILK", "TANGO"],
-      hintList: ["Your prefered mood right now", "American music genre", "Drink it", "Elegant dance"]
+      word: { "E": false, "S": false, "T": false, "E": false, "R": false },
+      hint: "Purim's female hero",
+      wordList: ["ESTER", "ESTER", "MILK", "TANGO"],
+      hintList: ["Purim's female hero", "Purim's female hero", "Drink it", "Elegant dance"]
     }
   }
 
@@ -122,13 +122,13 @@ class App extends Component {
     let { score } = this.state
     score = 100
     let word = { ...this.state.word }
-    word = { "C": false, "A": false, "L": false, "M": false }
+    word = { "E": false, "S": false, "T": false, "E": false, "R": false }
     let { hint } = this.state
-    hint = "Your prefered mood right now"
+    hint = "Purim's female hero"
     let wordList = [...this.state.wordList]
-    wordList = ["CALM", "BLUES", "MILK", "TANGO"]
+    wordList = ["ESTER", "BLUES", "MILK", "TANGO"]
     let hintList = [...this.state.hintList]
-    hintList = ["Your prefered mood right now", "American music genre", "Drink it", "Elegant dance"]
+    hintList = ["Purim's female hero", "American music genre", "Drink it", "Elegant dance"]
     this.setState({
       letterStatus: letterStatus,
       score: score,
